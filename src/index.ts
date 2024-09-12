@@ -8,6 +8,7 @@ import { UserController } from "./presentation/driving/user/UserController";
 import { UserCreationUseCase } from "./application/usecases/user/UserCreationUseCase";
 import { UserService } from "./domain/services/user/UserService";
 import { UserRepository } from "./infrastructure/repositories/user/UserRepository";
+import { MessageConstants } from "./presentation/messages/MessageConstants";
 
 const app: Application = express();
 
@@ -27,8 +28,8 @@ app.use(ErrorHandler.handle);
 app.listen(Environment.PORT, async () => {
   try {
     await AppDataSource.initialize();
-    console.log("Data Source has been initialized!");
-    console.log(`Server running at http://localhost:${Environment.PORT}`);
+    console.log(MessageConstants.INITIALIZED_DATA_SOURCE);
+    console.log(MessageConstants.SERVER_RUNNING_AT(Environment.PORT));
   } catch (error) {
     throw error;
   }
